@@ -1,0 +1,99 @@
+
+* {
+    font-family: self;
+}
+.navBar {
+    background-color: #08535D;
+    padding: 20px;
+    text-align: center;
+}
+ li {
+    list-style: none;
+    display: inline;
+    padding: 30px;
+    
+}
+.navBar li a:hover,
+.form-submit li a:hover {
+    font-weight: bold;
+}
+.navBar li a {
+    color : white;
+    text-decoration: none;
+    font-size: 20px;
+   
+}
+.form-submit li a{
+text-decoration: none;
+color: green;
+font-size: 22px;
+
+}
+ .user {
+    color:brown;
+    font-size: 20px;
+    font-weight: bold;
+   
+}
+.post {
+    color: black;
+    font-size: 20px;
+    
+}
+.posts {
+    border: 1px solid gray;
+    margin: 20px 0;
+    padding: 0px;
+}
+.posts li {
+    display: block;
+}
+label {
+    font-size: 18px;
+}
+.error {
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+    padding-right: 50%;
+}
+.button-post {
+    padding: 15px;
+}
+.button-post > li {
+    display: inline;
+    color: gray;
+    cursor: pointer;
+    font-weight: bold;
+}
+.button-post > li:hover {
+    color: #02333c;
+}
+
+
+.title {
+    color: #02333c;
+    padding: 15px;
+}
+
+.content {
+    height: 100px;
+    padding: 0;
+}
+
+span {
+    padding-right: 20px;
+    font-size:20px;
+    color: black;
+}
+
+.posts img  {
+    width: 100%;
+    padding: 10px;
+}
+.span {
+    color:#02333c;
+    font-size: 16px;
+    display: inline;
+}
+
