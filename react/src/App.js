@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <Header/>
-      <div className="container px-5">
+      <div className="container px-md-5">
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/Login' component={Login} />

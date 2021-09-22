@@ -8,6 +8,7 @@ class Home extends Component {
     state = {
         posts: [],
         text: '',
+        content: '',
         image: null,
         count: [],
         }
@@ -17,6 +18,12 @@ class Home extends Component {
             text: e.target.value
         })
     }
+    SaveContent = (e) => {
+        this.setState({
+            content: e.target.value
+        })
+    }
+
     SaveImage = (e) => {
         this.setState({
             image: e.target.files[0]
@@ -31,9 +38,10 @@ class Home extends Component {
         const formData = new FormData();
         formData.append('avatar', this.state.image);
         formData.append('post', this.state.text)
+        formData.append('content', this.state.content)
         formData.append('userId', localStorage.getItem('_id'));
 
-        fetch('http://localhost:3000/api/addPost', {
+        fetch('http://localhost:8080/api/addPost', {
             method: 'POST',
             body: formData,
             headers: {
@@ -43,6 +51,7 @@ class Home extends Component {
             .then(res => res.json())
             .then(res => {
                 e.target.text.value = '';
+                e.target.content.value = '';
                 e.target.file.files = null;
                 this.getData();
             })
@@ -51,7 +60,7 @@ class Home extends Component {
     /**----------------------------------------------------------------- */
 
     getData = async () => {
-        fetch('http://localhost:3000/api/getPost', {
+        fetch('http://localhost:8080/api/getPost', {
             method: 'GET'
         })
             .then(res => res.json())
@@ -75,7 +84,7 @@ class Home extends Component {
 
     deletPost = (index, id) => {
         const data = { "userId": localStorage.getItem('_id') }
-        fetch(`http://localhost:3000/api/delete-post/${id}`,
+        fetch(`http://localhost:8080/api/delete-post/${id}`,
             {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -96,14 +105,13 @@ class Home extends Component {
 
 
 
-    editPost = (value, id, index) => {
+    editPost = (value,valueContent, id, index) => {
 
         const data = {
-            "posts": value
+            "posts": value,
+            "content":valueContent
         }
-
-
-        fetch(`http://localhost:3000/api/update-post/${id}`
+        fetch(`http://localhost:8080/api/update-post/${id}`
             ,
             {
                 method: 'POST',
@@ -117,6 +125,7 @@ class Home extends Component {
         let posts = this.state.posts;
         let change = posts[index];
         change['post'] = value;
+        change['content']= valueContent;
         this.setState({
             posts
         })
@@ -127,7 +136,7 @@ class Home extends Component {
 
 
     count = () => {
-        fetch('http://localhost:3000/api/count-like', {
+        fetch('http://localhost:8080/api/count-like', {
             method: 'GET'
         })
             .then(res => res.json())
@@ -154,7 +163,7 @@ class Home extends Component {
             "userId": localStorage.getItem('_id'),
             "postId": id
         }
-        fetch('http://localhost:3000/api/add-like', {
+        fetch('http://localhost:8080/api/add-like', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -170,7 +179,7 @@ class Home extends Component {
 
         var cnt = 0;
         for (var i = 0; i < array_elements.length; i++) {
-            if (array_elements[i].postId == value) {
+            if (array_elements[i].postId === value) {
                 cnt++;
             }
 
@@ -189,6 +198,7 @@ class Home extends Component {
                         addSubmit={this.addSubmit}
                         SaveText={this.SaveText}
                         SaveImage={this.SaveImage}
+                        SaveContent={this.SaveContent}
                     />
                     <div>
                         {
@@ -221,8 +231,10 @@ class Home extends Component {
                     this.state.posts.map(post => {
                         return <ul className="card posts">
                             <li className=" card-header user">{post?.userId?.name}</li>
-                            <li className=" card-body post">{post.post}</li>
-                            <InnerImageZoom src={'http://localhost:3000/' + post.avatar} />
+                            <li className=" card-body post title">{post.post}</li>
+                            <li className=" card-body post">{post.content}</li>
+
+                            <InnerImageZoom src={'http://localhost:8080/' + post.avatar} />
 
                             <hr />
                             <ul className="button-post">

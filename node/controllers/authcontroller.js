@@ -86,24 +86,17 @@ const login = (req, res, next) => {
     })
 }
 
-const deleteUser = async (req, res, next) => {
-  const { id } = req.params;
-  const user = await User.findOneAndDelete(id);
-  if (!user) {
-    const error = new Error('Could not find news.');
-    error.statusCode = 404;
-    throw error;
-  }
-  res.status(200).json({ message: 'delete fetched.', user });
-}
+
 
 const AddPost = async (req, res, next) => {
   const post = req.body.post;
+  const content = req.body.content;
   const userId = req.body.userId;
   const avatar = req.file.path;
 
   const postData = new Post({
     post: post,
+    content : content,
     userId: mongoose.Types.ObjectId(userId),
     avatar: avatar.split('\\')[1]
   });
@@ -175,7 +168,8 @@ const like = async (req, res, next) => {
 
 const updatePost = async (req, res, next) => {
   const postId = req.params.postId;
-  const posts = req.body.posts
+  const {posts,content} = req.body;
+
 
   try {
     const post = await Post.findById(postId);
@@ -183,11 +177,16 @@ const updatePost = async (req, res, next) => {
       console.log('error')
     }
     post.post = posts;
+    post.content = content;
+
     await post.save();
+    
+
     res.status(201).json({ message: 'News updated!' });
   } catch (e) {
     res.status(201).json({ message: e.message, code: e.statusCode });
   }
+
 }
 
 const count = async (req, res, next) => {
@@ -199,5 +198,5 @@ const count = async (req, res, next) => {
 
 
 module.exports = {
-  register, login, deleteUser, AddPost, getPost, deletePost, like, updatePost, count
+  register, login, AddPost, getPost, deletePost, like, updatePost, count
 }

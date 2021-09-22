@@ -51,7 +51,7 @@ class Register extends Component {
             password: this.state.password,
         }
 
-        axios.post('http://localhost:3000/api/register', data)
+        axios.post('http://localhost:8080/api/register', data)
             .then(res => {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('_id', res.data._id);

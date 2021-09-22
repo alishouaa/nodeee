@@ -28,7 +28,7 @@ class Header extends Component {
         return (
             <div>
                 <ul className="navBar">
-                    <li> <Link to="/">الصفحة الرئيسية</Link></li>
+                    <li className="d-block d-md-inline"> <Link to="/">الصفحة الرئيسية</Link></li>
                     <li> <Link to="/login">تسجيل الدخول</Link></li>
 
                 </ul>

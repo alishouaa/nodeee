@@ -13,6 +13,21 @@
     padding: 30px;
     
 }
+.post.title {
+    font-weight: bold;
+}
+.btn.title {
+color: white;
+font-size: 20px;
+    background-color: #02333c;
+}
+.btn.title:hover {
+    color: white;
+    font-weight: bold;
+}
+textarea {
+    height: 100px;
+}
 .navBar li a:hover,
 .form-submit li a:hover {
     font-weight: bold;

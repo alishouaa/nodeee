@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'react/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api', authRoute);
 app.use(express.static('uploads'));
@@ -36,19 +36,19 @@ app.use((error, req, res, next) => {
     const { message } = error;
     const { data } = error;
     const { succes } = error;
-    res.status(status).json({ message, data, succes }).sendfile(Path.join(__dirname, 'react/build', 'index.html'));
+    res.status(status).json({ message, data, succes }).sendfile(Path.join(__dirname, 'build', 'index.html'));
   });
   
   
-  const port = 3000
 
-  app.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
+  // app.get('/', (req, res) => {
+  //   res.send('Hello World!')
+  // })
   
-  app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-  })
+  const server = app.listen(process.env.PORT || 8080, () => {
+    const port = server.address().port;
+    console.log(`Express is working on port ${port}`);
+  });
 
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: "true",

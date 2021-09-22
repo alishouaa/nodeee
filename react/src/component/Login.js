@@ -33,7 +33,7 @@ class Register extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        axios.post('http://localhost:3000/api/login', data)
+        axios.post('http://localhost:8080/api/login', data)
             .then(res => {
                 if("token" in res.data)
                {
