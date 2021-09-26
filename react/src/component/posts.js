@@ -55,7 +55,7 @@ const Posts = (props) => {
     return (
         isEdit ? (
             <div>
-                <h2 className='title' >المنشورات</h2>
+                <h2 className='title'>المنشورات</h2>
                 <ul className="card  posts">
                     <li className="card-header user">{props.post?.userId?.name}</li>
                     <li className="card-body post title">{props.post.post}</li>
