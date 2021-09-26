@@ -3,7 +3,6 @@ import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 import InnerImageZoom from 'react-inner-image-zoom';
 const Posts = (props) => {
 
-
     var inputRef = useRef(null)
     var inputRefContent = useRef(null)
 
@@ -23,7 +22,8 @@ const Posts = (props) => {
     }
 
     var style = {
-        display: "inline"
+        visibility: "visible"
+    
     }
 
     var color = {
@@ -33,7 +33,7 @@ const Posts = (props) => {
 
     if (props.post.userId._id !== localStorage.getItem('_id')) {
         style = {
-            display: "none"
+            visibility: "hidden"
         };
     }
     if (arr.find(o => o.userId === localStorage.getItem('_id')) && arr.find(o => o.postId === props.post._id)) {
@@ -67,7 +67,7 @@ const Posts = (props) => {
                         <li className="d-block p-2 d-md-inline p-md-5" style={color} id="like" onClick={() => props.LikePost(props.post._id) && plusLike()} >إعجاب </li>
                         <li className="d-block p-2 d-md-inline p-md-5" id="delete" style={style} onClick={() => props.deletPost(props.index, props.post._id)}>حذف المنشور</li>
                         <li className="d-block p-2 d-md-inline p-md-5" style={style} onClick={() => toggleState()}>تعديل المنشور</li>
-                        <span className="text-center">{count} </span>
+                        <span className="text-center" >{count} </span>
                     </ul>
                 </ul>
             </div>
