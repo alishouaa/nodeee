@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 
-class Register extends Component {
+class Login extends Component {
     
 
 
@@ -82,4 +82,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default Login;

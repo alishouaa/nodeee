@@ -20,6 +20,10 @@ class Header extends Component {
                 <div>
                     <ul className="navBar">
                         <li onClick={this.logout}> <Link to="/"> تسجيل الخروج</Link></li>
+                        <li> <Link to="/"> الصفحة الرئيسية </Link></li>
+                        <li> <Link to="/Privacy"> صفحة المستخدم </Link></li>
+
+
 
                     </ul>
                 </div>
