@@ -135,3 +135,8 @@ h2 {
    width: 800px;
    padding: 0;
 }
+.username {
+    color: grey;
+    font-size: 20px;
+    text-align: left;
+}

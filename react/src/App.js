@@ -7,7 +7,6 @@ import Home from './component/Home';
 import Login from './component/Login';
 import Header from './component/Headers';
 import Privacy from './component/Privacy';
-import { post } from 'jquery';
 
 
 class App extends Component {
@@ -196,10 +195,9 @@ class App extends Component {
   }
 
   render() {
-    const mypost = this.state.posts.filter((post) => {
+     this.state.posts.filter((post) => {
         return post._id === localStorage.getItem('_id')
       })
-      debugger
     return (
       <Router>
         <Header />

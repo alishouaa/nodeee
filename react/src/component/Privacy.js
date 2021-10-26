@@ -17,12 +17,11 @@ const Privacy = (props) => {
     setIsEdit(!isEdit)
     setPost(post)
   }
-  const mypost = props.posts
-  .filter((post) => {
+  const mypost = props.posts.filter((post) => {
     return post.userId?._id === localStorage.getItem('_id')
   })
   const contentview = mypost.map((post, index) => {
-    return <div>
+    return <div key={index}>
 
       <li className="card-header user">{post.userId?.name}</li>
       <li className="card-body post title">{post.post}</li>
@@ -31,7 +30,7 @@ const Privacy = (props) => {
       <hr />
 
 
-      <img id="img" src={'http://localhost:8080/' + post.avatar} />
+      <img id="img" src={'http://localhost:8080/' + post.avatar} alt="الصورة غير متوفرة على الخادم"/>
 
       <ul className="card-footer text-center button-post">
         <li className="d-block p-2 d-md-inline p-md-5" id="delete" onClick={() => props.deletPost(index,post?._id)}>حذف المنشور</li>
@@ -59,7 +58,7 @@ const Privacy = (props) => {
             <textarea defaultValue={post?.content} ref={inputRefContent} type="text" className="form-control" required />
             <input type="submit" className="btn btn-danger mt-4" value="تعديل المنشور" />
             <hr />
-            <img src={'http://localhost:8080/' + post.avatar} />
+            <img src={'http://localhost:8080/' + post.avatar} alt="الصورة غير متوفرة على الخادم" />
 
           </ul>
         </form>

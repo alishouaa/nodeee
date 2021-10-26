@@ -71,7 +71,7 @@ const login = (req, res, next) => {
             let token = jwt.sign({ name: user.name }, 'verySecretValue', { expiresIn: '1h' })
             res.json({
               message: 'login successfull',
-              token: token, _id: user._id
+              token: token, _id: user._id, username : user.name
             })
           } else {
             const err = new Error('كلمة السر خاطئة');
