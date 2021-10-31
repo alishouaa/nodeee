@@ -71,7 +71,7 @@ const login = (req, res, next) => {
             let token = jwt.sign({ name: user.name }, 'verySecretValue', { expiresIn: '1h' })
             res.json({
               message: 'login successfull',
-              token: token, _id: user._id, username : user.name
+              token: token, _id: user._id, username: user.name
             })
           } else {
             const err = new Error('كلمة السر خاطئة');
@@ -96,7 +96,7 @@ const AddPost = async (req, res, next) => {
 
   const postData = new Post({
     post: post,
-    content : content,
+    content: content,
     userId: mongoose.Types.ObjectId(userId),
     avatar: avatar.split('\\')[1]
   });
@@ -142,33 +142,39 @@ const like = async (req, res, next) => {
 
   const Like = await LikePost.findOne({ userId: req.body.userId, postId: req.body.postId });
   if (Like) {
-    const data = {
-      "userId": userId,
-      "postId": postId
-    }
-    await LikePost.deleteOne(data)
+    res.status(201).json({ message: 'is liked!' });
 
-  }
-  else {
+  } else {
     const data = new LikePost({
       userId: userId,
       postId: postId
 
     });
-
     const result = await data.save();
     res.status(201).json({ message: 'like!' });
 
   }
 
+
 }
 
+const deleteLike = async (req, res, next) => {
+  const userId = req.body.userId;
+  const postId = req.body.postId;
+  const Like = await LikePost.findOne({ userId: req.body.userId, postId: req.body.postId });
+  if (!Like) {
+    res.status(200).json({ message: 'not Like.' });
+  } else {
+    await LikePost.deleteOne({ _id: Like._id })
+    res.status(200).json({ message: 'delete Like.' });
 
+  }
 
+}
 
 const updatePost = async (req, res, next) => {
   const postId = req.params.postId;
-  const {posts,content} = req.body;
+  const { posts, content } = req.body;
 
 
   try {
@@ -180,7 +186,7 @@ const updatePost = async (req, res, next) => {
     post.content = content;
 
     await post.save();
-    
+
 
     res.status(201).json({ message: 'News updated!' });
   } catch (e) {
@@ -198,5 +204,5 @@ const count = async (req, res, next) => {
 
 
 module.exports = {
-  register, login, AddPost, getPost, deletePost, like, updatePost, count
+  register, login, AddPost, getPost, deletePost, like, updatePost, count, deleteLike
 }

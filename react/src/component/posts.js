@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
@@ -12,27 +12,55 @@ const Posts = (props) => {
 
     const [count, setCount] = useState(props.countLike);
 
+
     var color = {
         color: "grey"
     }
     let arr = props.count;
+    let idpost = props.post._id;
 
-    if (arr.find(o => o.userId === localStorage.getItem('_id')) && arr.find(o => o.postId === props.post._id)) {
+    if (arr.find(o => o.postId === idpost)) {
         color = {
             color: "red"
         }
+    } else {
+        color = {
+            color: "grey"
+        }
     }
 
 
-    const plusLike = () => {
-        if (arr.find(o => o.userId === localStorage.getItem('_id')) && arr.find(o => o.postId === props.post._id)) {
-            setCount(count => count - 1)
+
+    let timer = null;
+
+    const plusLike = (id) => {
+
+        let array = arr.filter((o) => {
+            return o.postId === id
+        })
+        if (array.find(k => k.postId === id)) {
+            clearTimeout(timer);
+            timer = null;
+            timer = setTimeout(() => {
+                props.deleteLike(id);
+            }, 500);
+
         } else {
-            setCount(count => count + 1)
+            clearTimeout(timer);
+            timer = null;
+            timer = setTimeout(() => {
+                props.LikePost(id)
+            }, 500);
+
         }
 
-    }
+        // if (arr.find(o => o.userId === localStorage.getItem('_id')) && arr.find(o => o.postId === props.post._id)) {
+        //     setCount(count => count - 1)
+        // } else {
+        //     setCount(count => count + 1)
 
+        // }
+    }
 
     return (
 
@@ -56,7 +84,7 @@ const Posts = (props) => {
                 </Modal>
 
                 <ul className="card-footer text-center button-post">
-                    <li className="d-block p-2 d-md-inline p-md-5" style={color} id="like" onClick={() => props.LikePost(props.post._id) && plusLike()} >إعجاب </li>
+                    <li className="d-block p-2 d-md-inline p-md-5" style={color} id="like" onClick={() => plusLike(props.post._id)} >إعجاب </li>
                     <span className="text-center" >{count} </span>
                 </ul>
             </ul>

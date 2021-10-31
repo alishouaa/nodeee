@@ -12,6 +12,7 @@ class Header extends Component {
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('_id');
+        localStorage.removeItem('username');
         axios.defaults.headers.common = { 'Authorization': '' };
         window.location.reload();
 

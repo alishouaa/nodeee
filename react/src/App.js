@@ -162,7 +162,6 @@ class App extends Component {
 
   }
   LikePost = async (id) => {
-
     const data = {
       "userId": localStorage.getItem('_id'),
       "postId": id
@@ -173,12 +172,31 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-    }).then(() => {
+    })
+    .then(()=> {
       this.count()
-
     })
 
   }
+  deleteLike = async (id) => {
+    const data = {
+      "userId": localStorage.getItem('_id'),
+      "postId": id
+    }
+    fetch('http://localhost:8080/api/delete-like', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(()=> {
+      this.count()
+    })
+     }
+
+
+
 
   countLikeFunction = (array_elements, value) => {
 
@@ -195,18 +213,19 @@ class App extends Component {
   }
 
   render() {
-     this.state.posts.filter((post) => {
-        return post._id === localStorage.getItem('_id')
-      })
+    this.state.posts.filter((post) => {
+      return post._id === localStorage.getItem('_id')
+    })
     return (
       <Router>
         <Header />
         <div className="container px-md-5">
-          
+
           <Switch>
             <Route exact path='/' render={(props) => <Home posts={this.state.posts}
               like={this.state.like}
               LikePost={this.LikePost}
+              deleteLike={this.deleteLike}
               count={this.state.count}
               onChangeInput={this.onChangeInput}
               countLikeFunction={this.countLikeFunction}
