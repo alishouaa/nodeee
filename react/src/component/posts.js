@@ -10,16 +10,16 @@ const Posts = (props) => {
     const handleShow = () => setShow(true);
 
 
-    const [count, setCount] = useState(props.countLike);
-
-
     var color = {
         color: "grey"
     }
     let arr = props.count;
     let idpost = props.post._id;
 
-    if (arr.find(o => o.postId === idpost)) {
+    const result = arr.filter((post) => post.postId === idpost);
+    let count = result.length;
+
+    if (result.find(o => o.userId === localStorage.getItem("_id"))) {
         color = {
             color: "red"
         }
@@ -30,36 +30,30 @@ const Posts = (props) => {
     }
 
 
-
     let timer = null;
 
     const plusLike = (id) => {
 
         let array = arr.filter((o) => {
-            return o.postId === id
+            return o.postId === id && o.userId === localStorage.getItem("_id")
         })
         if (array.find(k => k.postId === id)) {
             clearTimeout(timer);
             timer = null;
             timer = setTimeout(() => {
                 props.deleteLike(id);
-            }, 500);
+            }, 250);
 
         } else {
             clearTimeout(timer);
             timer = null;
             timer = setTimeout(() => {
                 props.LikePost(id)
-            }, 500);
+            }, 250);
 
         }
 
-        // if (arr.find(o => o.userId === localStorage.getItem('_id')) && arr.find(o => o.postId === props.post._id)) {
-        //     setCount(count => count - 1)
-        // } else {
-        //     setCount(count => count + 1)
 
-        // }
     }
 
     return (
