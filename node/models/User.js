@@ -18,6 +18,19 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    avatar : {
+      type: String,
+      required : true
+    },
+   
+    number : {
+      type : Number,
+      required : true
+    },
+    company : {
+      type: String,
+      required : true
+    }
  
   },
   { timestamps: true },

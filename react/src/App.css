@@ -3,9 +3,10 @@
     font-family: self;
 }
 .navBar {
-    background-color: #08535D;
+    background-color: #141359;
     padding: 20px;
     text-align: center;
+    margin: 0;
 }
  li {
     list-style: none;
@@ -122,7 +123,7 @@ h3 {
     text-align: center;
 }
 
-h2 {
+.hom > h2 {
     text-align: center;
     padding-top: 300px;
 }
@@ -139,4 +140,225 @@ h2 {
     color: grey;
     font-size: 20px;
     text-align: left;
+}
+.author {
+    font-weight: bold;
+    font-size: 17px;
+}
+#img {
+    width: 100%;
+    padding: 0;
+}
+ .logo {
+      padding: 7px;
+       font-size: 20px;
+        color: #e6e6fa;
+        font-weight:600;
+        border: 1px solid #e6e6fa;
+        border-radius: 20px;
+        margin: 0;
+    
+}
+.login {
+    padding-top: 50px;
+
+}
+.ground {
+    padding-top: 70px;
+    background-color: #ff9900de;
+    clip-path:ellipse(793px 572px at -4% 13%) ;
+    height: 657px;
+
+}
+.ground h1 {
+    color: #141359;
+    font-weight: bold;
+}
+.ground p {
+    color: #141359;
+    padding: 20px 150px 20px 15px;
+    font-size: 22px;
+    line-height: 50px;
+    font-weight: bold
+}
+.ground p span a {
+    font-size: 23px;
+    color: rgb(212, 205, 205);
+    text-decoration: none;
+    display: block;
+    padding-right: 20px;
+}
+.responsive {
+    display: none;
+}
+/* @keyframes mymove {
+    50% {clip-path: circle(50%);}
+  } */
+.fauser span{
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 55px;
+    color: white;
+   
+}
+.header {
+    background-color: #141359;
+    height: 657px;
+}
+.form input ,
+.form textarea {
+    background-color: rgb(240, 232, 232);
+}
+
+.form {
+    border: 1px solid rgb(175, 172, 172);
+    padding: 17px;
+}
+.model-comment li {
+    padding: 0px;
+    display: block;
+}
+
+.sideBar {
+    background-color: #faf9f9;
+}
+.sideBar ul {
+padding: 0;
+padding-top: 30px;
+
+}
+.sideBar ul li {
+    font-size: 20px;
+    display: block;
+    padding: 20px 0px;
+    padding-right: 20px;
+
+}
+.sideBar ul li:hover {
+    background-color: #e7e7ec;
+}
+.sideBar ul li a {
+    text-decoration: none;
+    color: rgb(48, 47, 47);
+}
+.profile {
+    background-color: #f1ecec;
+    padding: 20px 50px;
+}.profile ul li {
+    display: block;
+    padding: 20px 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.profile .photo {
+    width: 375px;
+}
+.row {
+    width: 100%;
+}
+h1.red {
+    color:brown
+}
+.text p {
+    background-color: #faf9f9;
+    padding: 15px;
+    line-height: 30px;
+    color: rgb(97, 93, 93);
+    text-align: center;
+}
+.information {
+    border-right: 1px solid rgb(180, 178, 178);
+    padding-right: 120px;
+}
+.pagepost span {
+    color: blue;
+    font-size: 18px;
+    font-weight: bold;
+}
+.pagepost ul li {
+    font-weight: bold;
+}
+.m-3.button-page {
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 20px;
+}
+.m-3.button-page:hover,
+.m-3.button-page:focus {
+    background-color: transparent;
+    color: grey;
+}
+@media (max-width:400px) {
+    .sideBar ul li {
+        display: inline;
+        padding: 10px;
+ 
+    }
+    .navBar {
+        padding:10px;
+    }
+    .navBar li {
+        display: block;
+        padding: 15px;
+    }
+    .button-post li  {
+        display: inline-block;
+        padding: 0 20px;
+    }
+    
+    button.bck {
+        background-color: transparent;
+        color: gray;
+        border: none;
+        font-weight: bold;
+    }
+    .model-comment .content {
+        margin-right: 50px;
+     }
+     .profile .photo {
+         width: 100%;
+     }
+     .profile ul li {
+         padding: 15px
+     }
+     .ground {
+         display: none;
+     }
+     .responsive {
+         display: inline;
+     }
+     .responsive p {
+         color: white;
+        font-size: 15px;
+        line-height: 40px;
+    }
+    .responsive p span a {
+        font-size: 23px;
+        color: #ff9900de;
+        text-decoration: none;
+        display: block; 
+    }
+    .header {
+        height: 710px;
+    }
+    .m-3.btn-responsive {
+        padding: 0 10px;  
+    }
+    .m-3.btn-responsive h5 {
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+    }
+    .sideBar ul {
+        padding: 5px 0;
+    }
+    .sideBar ul li {
+        padding: 10px 20px;
+        margin: 50px 0;
+    }
+    .sideBar ul li.res {
+        display: none;
+    }
+   
 }

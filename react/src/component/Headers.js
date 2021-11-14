@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBookOpen, faArrowLeft, faHome } from '@fortawesome/free-solid-svg-icons';
 
 
 
 class Header extends Component {
-  
+
 
     logout() {
         localStorage.removeItem('token');
@@ -23,23 +23,60 @@ class Header extends Component {
             return (
                 <div>
                     <ul className="navBar">
-                        <li onClick={this.logout}> <Link to="/"> تسجيل الخروج</Link></li>
-                        <li> <Link to="/"> الصفحة الرئيسية </Link></li>
-                        <li> <Link to="/Privacy"> صفحة المستخدم </Link></li>
-                        <li className="username"><FontAwesomeIcon className="mx-2" icon={faUser}>
-                                         </FontAwesomeIcon>{localStorage.getItem('username')}</li>
+                        <div className="row m-0">
+                            <div className="col-md-2">
+                                <li className="logo">
+                                    <FontAwesomeIcon className="mx-3" icon={faBookOpen}>
+                                    </FontAwesomeIcon>
+                                    وجه الكتاب</li>
+                            </div>
+                            <div className="col-md-10">
+                                <li> <Link to="/"><FontAwesomeIcon className="mx-3" icon={faHome}>
+                                    </FontAwesomeIcon> الصفحة الرئيسية </Link></li>
+                                <li> <Link to="/Privacy"><FontAwesomeIcon className="mx-3" icon={faUser}>
+                                    </FontAwesomeIcon>  الصفحة الشخصية </Link></li>
+                                <li onClick={this.logout}> <Link to="/"> تسجيل الخروج</Link></li>
 
+                            </div>
 
-
+                        </div>
                     </ul>
+
+                    {/* <Navbar bg="light" expand={false}>
+                        <Container fluid>
+                            <Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand>
+                            <Navbar.Toggle aria-controls="offcanvasNavbar" />
+                            <Navbar.Offcanvas
+                                id="offcanvasNavbar"
+                                aria-labelledby="offcanvasNavbarLabel"
+                                placement="end"
+                            >
+                                <Offcanvas.Body>
+                                    <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
+                                </Offcanvas.Body>
+                            </Navbar.Offcanvas>
+                        </Container>
+                    </Navbar> */}
                 </div>
             )
         }
         return (
             <div>
                 <ul className="navBar">
-                    <li className="d-block d-md-inline"> <Link to="/">الصفحة الرئيسية</Link></li>
-                    <li> <Link to="/login">تسجيل الدخول</Link></li>
+                    <div className="row">
+                        <div className="col-md-2">
+                            <li className="logo">
+                                <FontAwesomeIcon className="mx-2" icon={faBookOpen}>
+                                </FontAwesomeIcon>
+                                وجه الكتاب</li>
+                        </div>
+                        <div className="col-md-10">
+                            <li> <Link to="/">العودة إلى تسجيل الدخول <FontAwesomeIcon className="mx-2" icon={faArrowLeft}>
+                            </FontAwesomeIcon></Link></li>
+
+                        </div>
+
+                    </div>
 
                 </ul>
             </div>

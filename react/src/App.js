@@ -4,10 +4,9 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './component/Register';
 import Home from './component/Home';
-import Login from './component/Login';
-import Header from './component/Headers';
 import Privacy from './component/Privacy';
-
+import Pages from './component/Pages';
+import PostPage from './component/PostPage'
 
 class App extends Component {
 
@@ -17,6 +16,10 @@ class App extends Component {
     content: '',
     image: null,
     count: [],
+    comment: '',
+    users: [],
+
+
   }
 
   SaveText = (e) => {
@@ -33,6 +36,11 @@ class App extends Component {
   SaveImage = (e) => {
     this.setState({
       image: e.target.files[0]
+    })
+  }
+  commentContent = (e) => {
+    this.setState({
+      comment: e.target.value
     })
   }
 
@@ -58,7 +66,6 @@ class App extends Component {
       .then(res => {
         e.target.text.value = '';
         e.target.content.value = '';
-        e.target.file.files = null;
         this.getData();
       })
   }
@@ -81,6 +88,7 @@ class App extends Component {
 
     this.count()
     this.getData()
+    this.getUser()
 
   }
 
@@ -173,9 +181,9 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
     })
-    .then(()=> {
-      this.count()
-    })
+      .then(() => {
+        this.count()
+      })
 
   }
   deleteLike = async (id) => {
@@ -190,10 +198,10 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
     })
-    .then(()=> {
-      this.count()
-    })
-     }
+      .then(() => {
+        this.count()
+      })
+  }
 
 
 
@@ -212,16 +220,53 @@ class App extends Component {
     return cnt;
   }
 
+  commentPost = async (id, event) => {
+    event.preventDefault();
+    let data = {
+      "author": localStorage.getItem('_id'),
+      "content": this.state.comment,
+    };
+
+    fetch(`http://localhost:8080/api/comment-post/${id}`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          comment: ''
+        })
+        this.getData();
+      })
+  }
+
+  getUser = async () => {
+    fetch('http://localhost:8080/api/get-user', {
+      method: 'GET'
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          users: data.users,
+        });
+      })
+  }
+
+
+
   render() {
+
     this.state.posts.filter((post) => {
       return post._id === localStorage.getItem('_id')
     })
     return (
       <Router>
-        <Header />
-        <div className="container px-md-5">
-
+        <div>
           <Switch>
+
             <Route exact path='/' render={(props) => <Home posts={this.state.posts}
               like={this.state.like}
               LikePost={this.LikePost}
@@ -233,8 +278,12 @@ class App extends Component {
               SaveText={this.SaveText}
               SaveImage={this.SaveImage}
               SaveContent={this.SaveContent}
+              commentPost={this.commentPost}
+              commentContent={this.commentContent}
+              comment={this.state.comment}
+              users={this.state.users}
+
             />} />
-            <Route path='/Login' component={Login} />
             <Route path='/Register' component={Register} />
             <Route path='/Privacy' render={(props) => <Privacy
               posts={this.state.posts}
@@ -246,7 +295,12 @@ class App extends Component {
               count={this.state.count}
               onChangeInput={this.onChangeInput}
               countLikeFunction={this.countLikeFunction}
+              users={this.state.users}
             />} />
+            <Route path='/viewPage' component={PostPage} />
+            <Route path='/Pages' component={Pages} />
+
+
 
           </Switch>
         </div>
